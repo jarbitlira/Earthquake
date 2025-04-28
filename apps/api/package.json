@@ -6,10 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && npm run sentry:sourcemaps",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "nest start --watch --env-file .env",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org jarbitlira --project earthquake-api ./dist && sentry-cli sourcemaps upload --org jarbitlira --project earthquake-api ./dist",
+    "sentry:release": "sentry-cli releases new -p earthquake-api $GITHUB_RELEASE_TAG && sentry-cli releases set-commits --auto $GITHUB_RELEASE_TAG && sentry-cli releases finalize $GITHUB_RELEASE_TAG && sentry-cli releases deploys $GITHUB_RELEASE_TAG new -e production"
   },
   "dependencies": {
     "@apollo/server": "^4.12.0",
@@ -29,9 +31,11 @@
     "@nestjs/microservices": "^11.1.0",
     "@nestjs/platform-express": "^11.1.0",
     "@nestjs/swagger": "^11.1.5",
+    "@sentry/cli": "^2.43.1",
     "@sentry/nestjs": "^9.14.0",
     "@sentry/profiling-node": "^9.14.0",
     "graphql": "^16.11.0",
+    "joi": "^17.13.3",
     "mongoose": "^8.14.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2"
