@@ -5,7 +5,7 @@
   "scripts": {},
   "private": true,
   "devDependencies": {
-    "@expo/cli": "~0.21.8",
+    "@expo/cli": "~0.24.20",
     "@nestjs/schematics": "^10.0.1",
     "@nx/expo": "^20.8.1",
     "@nx/js": "20.8.1",
