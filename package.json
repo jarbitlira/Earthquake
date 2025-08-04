@@ -6,7 +6,7 @@
   "private": true,
   "devDependencies": {
     "@expo/cli": "~0.21.8",
-    "@nestjs/schematics": "^10.0.1",
+    "@nestjs/schematics": "^11.0.7",
     "@nx/expo": "^20.8.1",
     "@nx/js": "20.8.1",
     "@nx/nest": "^20.8.1",
